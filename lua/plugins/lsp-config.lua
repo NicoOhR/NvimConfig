@@ -39,7 +39,7 @@ return {
       })
       vim.lsp.inlay_hint.enable(true, {0})
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
+			vim.keymap.set("n", "gt", vim.lsp.buf.definition, {})
       vim.diagnostic.config({
       virtual_text = false,
       })
