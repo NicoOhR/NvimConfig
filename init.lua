@@ -13,6 +13,13 @@ vim.opt.rtp:prepend(lazypath)
 require("vim-options")
 require("lazy").setup("plugins")
 
+vim.api.nvim_create_autocmd("BufWritePre", {
+  callback = function()
+    vim.lsp.buf.format()
+  end,
+})
+
+
 vim.opt.background = "dark"
 vim.cmd.colorscheme("sakura");
 
