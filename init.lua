@@ -18,8 +18,5 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     vim.lsp.buf.format()
   end,
 })
-
-
 vim.opt.background = "dark"
-vim.cmd.colorscheme("sakura");
-
+vim.cmd.colorscheme("nord");
