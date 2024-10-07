@@ -1,4 +1,4 @@
-return{
+return {
   "folke/which-key.nvim",
   event = "VeryLazy",
   opts = {
@@ -15,4 +15,6 @@ return{
       desc = "Buffer Local Keymaps (which-key)",
     },
   },
+  { "nvchad/volt", lazy = true },
+  { "nvchad/menu", lazy = true },
 }
