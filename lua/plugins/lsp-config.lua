@@ -40,6 +40,20 @@ return {
       vim.diagnostic.config({
         virtual_text = true,
       })
+      -- hide diagnostics in insert mode
+      vim.api.nvim_create_autocmd("InsertEnter", {
+        pattern = "*",
+        callback = function()
+          vim.diagnostic.hide();
+        end
+      })
+      vim.api.nvim_create_autocmd("InsertLeave", {
+        pattern = "*",
+        callback = function()
+          vim.diagnostic.show();
+        end
+      })
+
       vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, {})
       vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
     end,
