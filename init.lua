@@ -19,4 +19,4 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 vim.opt.background = "dark"
-vim.cmd.colorscheme("nord");
+vim.cmd.colorscheme("gruvbox");
