@@ -9,7 +9,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "rust_analyzer", "tsserver", "clangd" },
+        ensure_installed = { "lua_ls", "rust_analyzer", "tsserver", "clangd", "bufls" },
       })
     end,
   },
@@ -24,6 +24,7 @@ return {
       local lspconfig = require("lspconfig")
       lspconfig.clangd.setup({
         capabilities = capabilities,
+        filetypes = { "c", "cpp" }
       })
       lspconfig.lua_ls.setup({
         capabilities = capabilities,
@@ -33,6 +34,9 @@ return {
       })
       lspconfig.rust_analyzer.setup({
         capabilities = capabilities,
+      })
+      lspconfig.bufls.setup({
+        filetypes = { "proto" },
       })
       vim.lsp.inlay_hint.enable(true, { 0 })
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
