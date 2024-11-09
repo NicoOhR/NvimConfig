@@ -15,6 +15,7 @@ vim.keymap.set('n', '<c-l>', ':wincmd l<CR>')
 vim.keymap.set('n', '<F5>', '<cmd>call vimspector#Launch()<cr>')
 vim.keymap.set('t', '<esc>', '<C-\\><C-N>', t_opts)
 vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
+vim.opt.cursorline = true
 vim.wo.number = true
 
 vim.keymap.set("n", "<C-t>", function()
