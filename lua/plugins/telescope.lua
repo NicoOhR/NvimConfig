@@ -7,7 +7,15 @@ return {
     tag = "0.1.5",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
+      local actions = require("telescope.actions")
       require("telescope").setup({
+        defaults = {
+          mappings = {
+            i = {
+              ["<esc>"] = actions.close,
+            },
+          },
+        },
         extensions = {
           ["ui-select"] = {
             require("telescope.themes").get_dropdown({}),
