@@ -27,6 +27,16 @@ return {
         cmdline = {
           view = "cmdline", -- Use the classic bottom cmdline
         },
+        routes = {
+          {
+            filter = {
+              event = "notify",
+              find = "server cancelled the request",
+            },
+            opts = { skip = true },
+          },
+        },
+
       })
     end,
   }
