@@ -32,11 +32,6 @@ return {
 					})
 				end,
 			})
-			vim.lsp.buf.format({
-				filter = function(client)
-					return client.name ~= "bufls"
-				end,
-			})
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
 			local noice = require("noice.lsp")

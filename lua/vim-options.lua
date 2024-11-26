@@ -8,36 +8,35 @@ vim.g.background = "light"
 vim.opt.swapfile = false
 local t_opts = { silent = true }
 -- Navigate vim panes better
-vim.keymap.set('n', '<c-k>', ':wincmd k<CR>')
-vim.keymap.set('n', '<c-j>', ':wincmd j<CR>')
-vim.keymap.set('n', '<c-h>', ':wincmd h<CR>')
-vim.keymap.set('n', '<c-l>', ':wincmd l<CR>')
-vim.keymap.set('n', '<F5>', '<cmd>call vimspector#Launch()<cr>')
-vim.keymap.set('t', '<esc>', '<C-\\><C-N>', t_opts)
-vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
+vim.keymap.set("n", "<c-k>", ":wincmd k<CR>")
+vim.keymap.set("n", "<c-j>", ":wincmd j<CR>")
+vim.keymap.set("n", "<c-h>", ":wincmd h<CR>")
+vim.keymap.set("n", "<c-l>", ":wincmd l<CR>")
+vim.keymap.set("t", "<esc>", "<C-\\><C-N>", t_opts)
+vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>")
 vim.opt.cursorline = true
 vim.opt.relativenumber = true
 vim.wo.number = true
-
+vim.opt.shell = "/usr/bin/fish"
 vim.keymap.set("n", "<C-t>", function()
-  require("menu").open("default")
+	require("menu").open("default")
 end, {})
 
-vim.o.updatetime = 250
+vim.o.updatetime = 100
 vim.api.nvim_create_autocmd({ "CursorHold" }, {
-  group = vim.api.nvim_create_augroup("float_diagnostic", { clear = true }),
-  callback = function()
-    vim.diagnostic.open_float(0, {
-      scope = "cursor",
-      focusable = false,
-      close_events = {
-        "CursorMoved",
-        "CursorMovedI",
-        "BufHidden",
-        "InsertCharPre",
-        "WinLeave",
-        "InsertEnter",
-      },
-    })
-  end
+	group = vim.api.nvim_create_augroup("float_diagnostic", { clear = true }),
+	callback = function()
+		vim.diagnostic.open_float(0, {
+			scope = "cursor",
+			focusable = false,
+			close_events = {
+				"CursorMoved",
+				"CursorMovedI",
+				"BufHidden",
+				"InsertCharPre",
+				"WinLeave",
+				"InsertEnter",
+			},
+		})
+	end,
 })
