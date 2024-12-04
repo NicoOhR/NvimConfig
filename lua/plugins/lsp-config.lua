@@ -9,7 +9,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "pyright", "ocamllsp", "rust_analyzer", "tsserver", "clangd", "bufls" },
+				ensure_installed = { "hls", "gopls", "lua_ls", "pyright", "ocamllsp", "rust_analyzer", "tsserver", "clangd", "bufls" },
 			})
 		end,
 	},
@@ -35,6 +35,13 @@ return {
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
 			local noice = require("noice.lsp")
+			lspconfig.gopls.setup({
+				capabilities = capabilities,
+				filetypes = { "go" },
+			})
+			lspconfig.hls.setup({
+				capabilities = capabilities,
+			})
 			lspconfig.clangd.setup({
 				capabilities = capabilities,
 				filetypes = { "c", "cpp" },
@@ -68,8 +75,8 @@ return {
 			vim.keymap.set("n", "gt", vim.lsp.buf.definition, {})
 			vim.diagnostic.config({
 				virtual_text = false, -- Disable virtual text
-				signs = true, -- Keep the signs (squiggly lines)
-				underline = true, -- Keep underlines for diagnostics
+				signs = true,         -- Keep the signs (squiggly lines)
+				underline = true,     -- Keep underlines for diagnostics
 				update_in_insert = false, -- Do not show diagnostics while in insert mode
 				severity_sort = true, -- Sort diagnostics by severity
 				float = {
