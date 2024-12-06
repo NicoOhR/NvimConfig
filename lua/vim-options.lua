@@ -14,7 +14,6 @@ vim.keymap.set("n", "<c-h>", ":wincmd h<CR>")
 vim.keymap.set("n", "<c-l>", ":wincmd l<CR>")
 vim.keymap.set("t", "<esc>", "<C-\\><C-N>", t_opts)
 vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>")
-vim.opt.cursorline = true
 vim.opt.relativenumber = true
 vim.wo.number = true
 vim.opt.shell = "/usr/bin/fish"

@@ -37,6 +37,14 @@ return {
           },
           {
             filter = {
+              event = "lsp",
+              kind = "message",
+              find = "ormolu: Internal Error: ormoluCmd: OrmoluParsingFailed",
+            },
+            opts = { skip = true },
+          },
+          {
+            filter = {
               event = "notify",
               find = "Format request failed, no matching language servers.",
             },
