@@ -19,4 +19,4 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end,
 })
 
-vim.cmd.colorscheme("kanagawa-dragon")
+vim.cmd.colorscheme("evergarden")

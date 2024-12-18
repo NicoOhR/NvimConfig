@@ -9,7 +9,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "hls", "gopls", "lua_ls", "pyright", "ocamllsp", "rust_analyzer", "tsserver", "clangd", "bufls" },
+				ensure_installed = { "html", "hls", "gopls", "lua_ls", "pyright", "ocamllsp", "rust_analyzer", "tsserver", "clangd", "bufls" },
 			})
 		end,
 	},
@@ -38,6 +38,9 @@ return {
 			lspconfig.gopls.setup({
 				capabilities = capabilities,
 				filetypes = { "go" },
+			})
+			lspconfig.html.setup({
+				capabilities = capabilities,
 			})
 			lspconfig.hls.setup({
 				capabilities = capabilities,

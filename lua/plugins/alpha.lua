@@ -1,31 +1,8 @@
 return {
-  "goolord/alpha-nvim",
-  dependencies = {
-    "nvim-tree/nvim-web-devicons",
-  },
-
+  "startup-nvim/startup.nvim",
+  dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim", "nvim-telescope/telescope-file-browser.nvim" },
   config = function()
-    local alpha = require("alpha")
-    local dashboard = require("alpha.themes.startify")
-
-    dashboard.section.header.val = {
-      [[                                                                       ]],
-      [[                                                                       ]],
-      [[                                                                       ]],
-      [[                                                                       ]],
-      [[                                                                     ]],
-      [[       ████ ██████           █████      ██                     ]],
-      [[      ███████████             █████                             ]],
-      [[      █████████ ███████████████████ ███   ███████████   ]],
-      [[     █████████  ███    █████████████ █████ ██████████████   ]],
-      [[    █████████ ██████████ █████████ █████ █████ ████ █████   ]],
-      [[  ███████████ ███    ███ █████████ █████ █████ ████ █████  ]],
-      [[ ██████  █████████████████████ ████ █████ █████ ████ ██████ ]],
-      [[                                                                       ]],
-      [[                                                                       ]],
-      [[                                                                       ]],
-    }
-
-    alpha.setup(dashboard.opts)
-  end,
+    require "startup".setup({ theme = "evil" })
+  end
 }
+

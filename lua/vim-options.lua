@@ -7,7 +7,6 @@ vim.g.background = "light"
 
 vim.opt.swapfile = false
 local t_opts = { silent = true }
--- Navigate vim panes better
 vim.keymap.set("n", "<c-k>", ":wincmd k<CR>")
 vim.keymap.set("n", "<c-j>", ":wincmd j<CR>")
 vim.keymap.set("n", "<c-h>", ":wincmd h<CR>")
@@ -20,6 +19,7 @@ vim.opt.shell = "/usr/bin/fish"
 vim.keymap.set("n", "<C-t>", function()
 	require("menu").open("default")
 end, {})
+
 
 vim.o.updatetime = 100
 vim.api.nvim_create_autocmd({ "CursorHold" }, {
