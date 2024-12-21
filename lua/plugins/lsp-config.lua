@@ -1,5 +1,10 @@
 return {
 	{
+		'mrcjkb/haskell-tools.nvim',
+		version = '^4', -- Recommended
+		lazy = false, -- This plugin is already lazy
+	},
+	{
 		"williamboman/mason.nvim",
 		config = function()
 			require("mason").setup()
@@ -9,7 +14,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "html", "hls", "gopls", "lua_ls", "pyright", "ocamllsp", "rust_analyzer", "tsserver", "clangd", "bufls" },
+				ensure_installed = { "html", "gopls", "lua_ls", "pyright", "ocamllsp", "rust_analyzer", "ts_ls", "clangd", "buf_ls" },
 			})
 		end,
 	},
@@ -32,9 +37,13 @@ return {
 					})
 				end,
 			})
+
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
-			local noice = require("noice.lsp")
+
+			lspconfig.ts_ls.setup({
+				capabilities = capabilities,
+			})
 			lspconfig.gopls.setup({
 				capabilities = capabilities,
 				filetypes = { "go" },
@@ -42,17 +51,11 @@ return {
 			lspconfig.html.setup({
 				capabilities = capabilities,
 			})
-			lspconfig.hls.setup({
-				capabilities = capabilities,
-			})
 			lspconfig.clangd.setup({
 				capabilities = capabilities,
 				filetypes = { "c", "cpp" },
 			})
 			lspconfig.lua_ls.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.tsserver.setup({
 				capabilities = capabilities,
 			})
 			lspconfig.pyright.setup({
@@ -66,7 +69,7 @@ return {
 			lspconfig.rust_analyzer.setup({
 				capabilities = capabilities,
 			})
-			lspconfig.bufls.setup({
+			lspconfig.buf_ls.setup({
 				on_attach = function(client, bufnr)
 					client.server_capabilities.documentFormattingProvider = true
 				end,
@@ -74,7 +77,7 @@ return {
 				filetypes = { "proto" },
 			})
 			vim.lsp.inlay_hint.enable(true, { 0 })
-			vim.keymap.set("n", "K", require("noice.lsp").hover, {})
+			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "gt", vim.lsp.buf.definition, {})
 			vim.diagnostic.config({
 				virtual_text = false, -- Disable virtual text
