@@ -20,4 +20,4 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 
-vim.cmd.colorscheme("evergarden")
+vim.cmd.colorscheme("flow")

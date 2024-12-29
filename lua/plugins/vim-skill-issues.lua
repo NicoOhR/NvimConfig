@@ -30,4 +30,11 @@ return {
     dependencies = { { "echasnovski/mini.icons", opts = {} } },
     -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
   },
+  {
+    "echasnovski/mini.pairs",
+    version = '*',
+    config = function()
+      require('mini.pairs').setup()
+    end
+  },
 }
