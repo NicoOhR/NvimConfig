@@ -10,5 +10,10 @@ return {
       "nvim-tree/nvim-web-devicons"
     }
   },
-
+  {
+    "lervag/vimtex",
+    config = function()
+    end,
+    lazy = false,
+  },
 }
