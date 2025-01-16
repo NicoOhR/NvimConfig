@@ -1,17 +1,8 @@
 return {
-  "folke/which-key.nvim",
-  event = "VeryLazy",
-  keys = {
-    {
-      "<leader>?",
-      function()
-        require("which-key").show({ global = false })
-      end,
-      desc = "Buffer Local Keymaps (which-key)",
-    },
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
   },
-  { "nvchad/volt", lazy = true },
-  { "nvchad/menu", lazy = true, dependencies = { { "nvzone/minty" } } },
   {
     "folke/twilight.nvim",
     config = function()
@@ -30,13 +21,6 @@ return {
 
   },
   {
-    "echasnovski/mini.pairs",
-    version = '*',
-    config = function()
-      require('mini.pairs').setup()
-    end
-  },
-  {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
@@ -48,5 +32,18 @@ return {
         },
       },
     },
+  },
+  {
+    "leath-dub/snipe.nvim",
+    keys = {
+      { "gb", function() require("snipe").open_buffer_menu() end, desc = "Open Snipe buffer menu" }
+    },
+    opts = {}
+  },
+  {
+    "andweeb/presence.nvim",
+    config = function()
+      require("presence").setup()
+    end
   },
 }

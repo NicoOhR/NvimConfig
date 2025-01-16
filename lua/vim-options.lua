@@ -22,23 +22,6 @@ end, {})
 
 
 vim.o.updatetime = 100
-vim.api.nvim_create_autocmd({ "CursorHold" }, {
-	group = vim.api.nvim_create_augroup("float_diagnostic", { clear = true }),
-	callback = function()
-		vim.diagnostic.open_float(0, {
-			scope = "cursor",
-			focusable = false,
-			close_events = {
-				"CursorMoved",
-				"CursorMovedI",
-				"BufHidden",
-				"InsertCharPre",
-				"WinLeave",
-				"InsertEnter",
-			},
-		})
-	end,
-})
 
 -- thank you @Jesse-Bakker
 for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do

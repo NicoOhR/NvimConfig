@@ -14,7 +14,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "html", "gopls", "lua_ls", "pyright", "ocamllsp", "rust_analyzer", "ts_ls", "clangd", "buf_ls" },
+				ensure_installed = { "html", "cmake", "gopls", "lua_ls", "pyright", "ocamllsp", "rust_analyzer", "ts_ls", "clangd", "buf_ls" },
 			})
 		end,
 	},
@@ -66,6 +66,9 @@ return {
 			lspconfig.rust_analyzer.setup({
 				capabilities = capabilities,
 			})
+			lspconfig.cmake.setup({
+				capabilities = capabilities,
+			})
 			lspconfig.buf_ls.setup({
 				on_attach = function(client, bufnr)
 					client.server_capabilities.documentFormattingProvider = true
@@ -77,14 +80,12 @@ return {
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "gt", vim.lsp.buf.definition, {})
 			vim.diagnostic.config({
-				virtual_text = false, -- Disable virtual text
-				signs = true,         -- Keep the signs (squiggly lines)
-				underline = true,     -- Keep underlines for diagnostics
-				update_in_insert = false, -- Do not show diagnostics while in insert mode
-				severity_sort = true, -- Sort diagnostics by severity
-				float = {
-					border = "rounded",
-				},
+				virtual_text = false,
+				signs = true,
+				underline = false,
+				update_in_insert = false,
+				severity_sort = true,
+				float = false,
 			})
 			vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, {})
 			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})

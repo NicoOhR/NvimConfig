@@ -24,5 +24,8 @@ return {
     opts = {
       contrast = "high"
     },
-  }
+  },
+  {
+    "rebelot/kanagawa.nvim",
+  },
 }
