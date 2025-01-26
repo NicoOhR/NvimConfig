@@ -18,6 +18,3 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		vim.lsp.buf.format()
 	end,
 })
-
---switch back to "flow"
-vim.cmd.colorscheme("kanagawa-dragon")
