@@ -18,3 +18,5 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		vim.lsp.buf.format()
 	end,
 })
+
+vim.cmd.colorscheme("gruvbox")

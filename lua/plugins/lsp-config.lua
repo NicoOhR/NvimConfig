@@ -14,7 +14,8 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "html", "cmake", "gopls", "lua_ls", "pyright", "ocamllsp", "rust_analyzer", "ts_ls", "clangd", "buf_ls" },
+				ensure_installed = { "fortls", "html", "cmake", "gopls", "lua_ls", "pyright", "ocamllsp", "rust_analyzer", "ts_ls", "clangd", "buf_ls" },
+				automatic_installation = true,
 			})
 		end,
 	},
@@ -37,44 +38,12 @@ return {
 
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
-
-			lspconfig.ts_ls.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.gopls.setup({
-				capabilities = capabilities,
-				filetypes = { "go" },
-			})
-			lspconfig.html.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.clangd.setup({
-				capabilities = capabilities,
-				filetypes = { "c", "cpp" },
-			})
-			lspconfig.lua_ls.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.pyright.setup({
-				capabilities = capabilities,
-				filetypes = { "python" },
-			})
-			lspconfig.ocamllsp.setup({
-				capabilities = capabilities,
-				filetypes = { "ocaml" },
-			})
-			lspconfig.rust_analyzer.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.cmake.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.buf_ls.setup({
-				on_attach = function(client, bufnr)
-					client.server_capabilities.documentFormattingProvider = true
+			require("mason-lspconfig").setup_handlers({
+				function(server_name)
+					lspconfig[server_name].setup {
+						capabilities = capabilities,
+					}
 				end,
-				cmd = { "bufls", "serve" },
-				filetypes = { "proto" },
 			})
 			vim.lsp.inlay_hint.enable(true, { 0 })
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
