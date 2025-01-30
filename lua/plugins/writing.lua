@@ -12,8 +12,10 @@ return {
   },
   {
     "lervag/vimtex",
-    config = function()
-    end,
     lazy = false,
+    init = function()
+      vim.g.vimtex_view_method = "zathura"
+      vim.g.setlocalleader = ","
+    end
   },
 }

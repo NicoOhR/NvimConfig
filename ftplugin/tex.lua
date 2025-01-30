@@ -1,3 +1,4 @@
 require("texpresso").attach()
 
-vim.cmd("TeXpresso %")
+-- vim.cmd("TeXpresso %")
+--
