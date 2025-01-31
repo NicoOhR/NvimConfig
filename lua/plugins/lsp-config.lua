@@ -14,7 +14,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "fortls", "html", "cmake", "gopls", "lua_ls", "pyright", "ocamllsp", "rust_analyzer", "ts_ls", "clangd", "buf_ls" },
+				ensure_installed = { "texlab", "fortls", "html", "cmake", "gopls", "lua_ls", "pyright", "ocamllsp", "rust_analyzer", "ts_ls", "clangd", "buf_ls" },
 				automatic_installation = true,
 			})
 		end,
