@@ -1,4 +1,4 @@
-vim.g.maplocalleader = ','
+vim.g.maplocalleader = ","
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -17,18 +17,16 @@ require("lazy").setup("plugins")
 
 vim.api.nvim_create_autocmd("BufWritePre", {
 	callback = function()
-		vim.lsp.buf.format()
+		require("conform").format()
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
-	pattern = { "*.md", "*.qmd" },
-	callback = function()
-		require('otter').activate()
-	end,
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = { "*.md", "*.qmd", "*.ipynb" },
+	callback = function() end,
 })
 
-vim.cmd('filetype plugin indent on')
-vim.cmd('syntax on')
+vim.cmd("filetype plugin indent on")
+vim.cmd("syntax on")
 
 vim.cmd.colorscheme("gruvbox")
