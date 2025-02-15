@@ -1,5 +1,12 @@
 return {
   {
+    "rjshkhr/shadow.nvim",
+    priority = 1000,
+    config = function()
+      vim.opt.termguicolors = true
+    end,
+  },
+  {
     "ellisonleao/gruvbox.nvim",
     config = function()
       require("gruvbox").setup({

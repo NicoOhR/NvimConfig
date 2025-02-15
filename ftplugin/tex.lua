@@ -1,4 +1,9 @@
 require("texpresso").attach()
-
--- vim.cmd("TeXpresso %")
---
+vim.g.vimtex_compiler_latexmk = {
+	options = {
+		"-shell-escape",
+		"-pdf",
+		"-interaction=nonstopmode",
+		"-synctex=1"
+	}
+}

@@ -1,3 +1,4 @@
+vim.g.maplocalleader = ','
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -10,6 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 	})
 end
 vim.opt.rtp:prepend(lazypath)
+require("user.commands")
 require("vim-options")
 require("lazy").setup("plugins")
 
@@ -22,4 +24,4 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.cmd('filetype plugin indent on')
 vim.cmd('syntax on')
 
-vim.cmd.colorscheme("gruvbox")
+vim.cmd.colorscheme("shadow")
