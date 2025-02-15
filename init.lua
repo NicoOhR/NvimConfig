@@ -21,7 +21,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end,
 })
 
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+	pattern = { "*.md", "*.qmd" },
+	callback = function()
+		require('otter').activate()
+	end,
+})
+
 vim.cmd('filetype plugin indent on')
 vim.cmd('syntax on')
 
-vim.cmd.colorscheme("shadow")
+vim.cmd.colorscheme("gruvbox")

@@ -52,3 +52,19 @@ end, {
   nargs = 1,
   complete = 'file'
 })
+
+local function new_code_block()
+  local code_block = {
+    "```python",
+    "",
+    "```",
+  }
+  local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+
+  vim.api.nvim_buf_set_lines(0, row, row, true, code_block)
+  vim.api.nvim_win_set_cursor(0, { row + 1, 0 })
+
+  vim.cmd("startinsert")
+end
+
+vim.api.nvim_create_user_command("InsertPythonBlock", new_code_block, {})
