@@ -1,7 +1,7 @@
 return {
 	{
-		'mrcjkb/haskell-tools.nvim',
-		version = '^4', -- Recommended
+		"mrcjkb/haskell-tools.nvim",
+		version = "^4", -- Recommended
 		lazy = false, -- This plugin is already lazy
 	},
 	{
@@ -14,7 +14,20 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "texlab", "fortls", "html", "cmake", "gopls", "lua_ls", "pyright", "ocamllsp", "rust_analyzer", "ts_ls", "clangd", "buf_ls" },
+				ensure_installed = {
+					"texlab",
+					"fortls",
+					"html",
+					"cmake",
+					"gopls",
+					"lua_ls",
+					"pyright",
+					"ocamllsp",
+					"rust_analyzer",
+					"ts_ls",
+					"clangd",
+					"buf_ls",
+				},
 				automatic_installation = true,
 			})
 		end,
@@ -30,7 +43,6 @@ return {
 					vim.api.nvim_create_autocmd("BufWritePre", {
 						buffer = args.buf,
 						callback = function()
-							print("conform")
 							require("conform").format({ async = false, id = args.data.client_id })
 						end,
 					})
@@ -41,9 +53,9 @@ return {
 			local lspconfig = require("lspconfig")
 			require("mason-lspconfig").setup_handlers({
 				function(server_name)
-					lspconfig[server_name].setup {
+					lspconfig[server_name].setup({
 						capabilities = capabilities,
-					}
+					})
 				end,
 			})
 			vim.lsp.inlay_hint.enable(true, { 0 })
