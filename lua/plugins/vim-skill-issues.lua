@@ -40,10 +40,4 @@ return {
     },
     opts = {}
   },
-  {
-    "andweeb/presence.nvim",
-    config = function()
-      require("presence").setup()
-    end
-  },
 }
