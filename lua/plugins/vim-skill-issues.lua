@@ -4,6 +4,9 @@ return {
     event = "VeryLazy",
   },
   {
+    "dstein64/vim-startuptime",
+  },
+  {
     "folke/twilight.nvim",
     config = function()
       local twilight = require("twilight")
