@@ -4,6 +4,7 @@ return {
 		opts = {},
 		config = function()
 			require("conform").setup({
+				async = false,
 				formatters_by_ft = {
 					lua = { "stylua" },
 					python = { "isort", "black" },
