@@ -40,4 +40,14 @@ return {
   {
     "rebelot/kanagawa.nvim",
   },
+  {
+    "metalelf0/black-metal-theme-neovim", 
+    config = function()
+      require("black-metal").setup({
+        theme = "impaled-nazarene", 
+        variant = "light",
+        alt_bg = true,
+      })
+    end 
+  },
 }

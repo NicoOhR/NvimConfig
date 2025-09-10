@@ -33,4 +33,5 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.cmd("filetype plugin indent on")
 vim.cmd("syntax on")
 
-vim.cmd.colorscheme("gruvbox")
+vim.cmd.colorscheme("evergarden")
+-- require("black-metal").load()
