@@ -9,7 +9,7 @@ return {
 			vim.g.vimtex_compiler_latexmk = {
 				build_dir = "build",
 			}
-
+			vim.g.vimtex_compiler_latexmk_engines = { _ = '-xelatex' }	
 			vim.g.vimtex_view_method = "mupdf"
 			vim.g.setlocalleader = ","
 			vim.g.vimtex_quickfix_mode = 0

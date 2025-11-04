@@ -4,6 +4,9 @@ return {
     event = "VeryLazy",
   },
   {
+    "unblevable/quick-scope"
+  },
+  {
     "dstein64/vim-startuptime",
   },
   {
