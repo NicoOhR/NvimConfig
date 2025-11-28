@@ -14,6 +14,8 @@ return {
 					c = { "clang-format" },
 					markdown = { "injected" },
 					quarto = { "injected" },
+					haskell = { "fourmolu" },
+					latex = { "tex-fmt" },
 				},
 			})
 			-- Customize the "injected" formatter
@@ -41,6 +43,7 @@ return {
 						typescript = "ts",
 					},
 					-- Map of treesitter language to formatters to use
+					--
 					-- (defaults to the value from formatters_by_ft)
 					lang_to_formatters = {},
 				},

@@ -2,7 +2,8 @@ vim.g.maplocalleader = ","
 
 vim.g.python3_host_prog = "/usr/bin/python3"
 vim.g.jukit_mappings_ext_enabled = { "py", "ipynb" }
-
+vim.opt.wildmode = { "longest", "list", "full" }
+vim.opt.wildmenu = true
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
