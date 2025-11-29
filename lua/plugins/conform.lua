@@ -15,7 +15,7 @@ return {
 					markdown = { "injected" },
 					quarto = { "injected" },
 					haskell = { "fourmolu" },
-					latex = { "tex-fmt" },
+					tex = { "tex-fmt" },
 				},
 			})
 			-- Customize the "injected" formatter
