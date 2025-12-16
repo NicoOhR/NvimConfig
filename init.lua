@@ -34,4 +34,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.cmd("filetype plugin indent on")
 vim.cmd("syntax on")
 
+vim.opt.number = true
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "number"
+
 vim.cmd.colorscheme("gruvbox")
