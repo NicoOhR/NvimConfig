@@ -32,7 +32,7 @@ return {
 				end,
 			})
 
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+			-- vim.keymap.set("n", "K", require("hover").open(), {})
 			vim.keymap.set("n", "gt", vim.lsp.buf.definition, {})
 			vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, {})
 			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
@@ -46,7 +46,7 @@ return {
 			})
 
 			-- automatically configure and enable all installed LSPs
-			installed_lsp = require("mason-lspconfig").get_installed_servers()
+			local installed_lsp = require("mason-lspconfig").get_installed_servers()
 			for _, lsp in ipairs(installed_lsp) do
 				vim.lsp.enable(lsp)
 				vim.lsp.config(lsp, {

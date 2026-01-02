@@ -12,6 +12,7 @@ return {
 					javascript = { "prettierd", "prettier", stop_after_first = true },
 					go = { "crlfmtl" },
 					c = { "clang-format" },
+					cpp = { "clang-format" },
 					markdown = { "injected" },
 					quarto = { "injected" },
 					haskell = { "fourmolu" },
