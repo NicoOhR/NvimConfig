@@ -46,12 +46,16 @@ return {
 			})
 
 			-- automatically configure and enable all installed LSPs
+			-- leanls is excluded because lean.nvim manages its own LSP client
+			local lean_managed = { leanls = true }
 			local installed_lsp = require("mason-lspconfig").get_installed_servers()
 			for _, lsp in ipairs(installed_lsp) do
-				vim.lsp.enable(lsp)
-				vim.lsp.config(lsp, {
-					capabilities = capabilities,
-				})
+				if not lean_managed[lsp] then
+					vim.lsp.enable(lsp)
+					vim.lsp.config(lsp, {
+						capabilities = capabilities,
+					})
+				end
 			end
 			-- server specific configurations can be added outside of the loop
 			vim.lsp.config("hls", {

@@ -1,5 +1,5 @@
 vim.g.maplocalleader = ","
-
+vim.filetype.add({ extension = { lean = "lean" } })
 vim.g.python3_host_prog = "/usr/bin/python3"
 vim.g.jukit_mappings_ext_enabled = { "py", "ipynb" }
 vim.opt.wildmode = { "longest", "list", "full" }
@@ -15,6 +15,14 @@ if not vim.loop.fs_stat(lazypath) then
 		lazypath,
 	})
 end
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = "*.lean",
+	callback = function()
+		vim.bo.filetype = "lean"
+	end,
+})
+
 vim.opt.rtp:prepend(lazypath)
 require("user.commands")
 require("vim-options")
@@ -31,7 +39,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = { "*.md", "*.qmd", "*.ipynb" },
 	callback = function() end,
 })
-
 vim.cmd("filetype plugin indent on")
 vim.cmd("syntax on")
 
