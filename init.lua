@@ -23,6 +23,7 @@ require("lazy").setup("plugins")
 vim.api.nvim_create_autocmd("BufWritePre", {
 	callback = function()
 		require("conform").format()
+		vim.diagnostic.reset(nil, 0)
 	end,
 })
 
