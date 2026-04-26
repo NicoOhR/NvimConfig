@@ -47,6 +47,14 @@ return {
 
 			-- automatically configure and enable all installed LSPs
 			-- leanls is excluded because lean.nvim manages its own LSP client
+			vim.api.nvim_create_autocmd("InsertLeave", {
+				callback = function(args)
+					for _, client in ipairs(vim.lsp.get_clients({ bufnr = args.buf, name = "basedpyright" })) do
+						vim.diagnostic.reset(vim.lsp.diagnostic.get_namespace(client.id), args.buf)
+					end
+				end,
+			})
+
 			local lean_managed = { leanls = true }
 			local installed_lsp = require("mason-lspconfig").get_installed_servers()
 			for _, lsp in ipairs(installed_lsp) do
@@ -58,6 +66,22 @@ return {
 				end
 			end
 			-- server specific configurations can be added outside of the loop
+			vim.lsp.config("basedpyright", {
+				capabilities = capabilities,
+				settings = {
+					python = {
+						pythonPath = vim.fn.exepath("python3"),
+					},
+					basedpyright = {
+						typeCheckingMode = "basic",
+						analysis = {
+							diagnosticMode = "openFilesOnly",
+							exclude = { "**/node_modules", "**/__pycache__", "**/tests", ".git", ".venv" },
+							ignore = { "**/node_modules", "**/__pycache__", ".venv" },
+						},
+					},
+				},
+			})
 			vim.lsp.config("hls", {
 				capabilities = capabilities,
 				settings = {

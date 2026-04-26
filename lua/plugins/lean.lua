@@ -16,6 +16,9 @@ return {
 		opts = {
 			mappings = true,
 			lsp = {}, -- empty table = use defaults, which invokes `lake serve`
+			progress_bars = {
+				enable = false,
+			},
 		},
 	},
 }
