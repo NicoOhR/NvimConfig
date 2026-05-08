@@ -69,15 +69,14 @@ return {
 			vim.lsp.config("basedpyright", {
 				capabilities = capabilities,
 				settings = {
-					python = {
-						pythonPath = vim.fn.exepath("python3"),
-					},
 					basedpyright = {
 						typeCheckingMode = "basic",
 						analysis = {
 							diagnosticMode = "openFilesOnly",
 							exclude = { "**/node_modules", "**/__pycache__", "**/tests", ".git", ".venv" },
 							ignore = { "**/node_modules", "**/__pycache__", ".venv" },
+							venvPath = ".",
+							venv = ".venv",
 						},
 					},
 				},
