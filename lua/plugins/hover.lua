@@ -9,7 +9,6 @@ return {
 				"hover.providers.lsp",
 				"hover.providers.dap",
 				"hover.providers.man",
-				"hover.providers.dictionary",
 				-- Optional, disabled by default:
 				-- 'hover.providers.gh',
 				-- 'hover.providers.gh_user',
@@ -31,9 +30,8 @@ return {
 		})
 
 		-- Setup keymaps
-		vim.keymap.set("n", "K", function()
-			require("hover").open()
-		end, { desc = "hover.nvim (open)" })
+		-- Note: K is handled per-buffer in lsp-config.lua (smart_hover) so that a
+		-- second K press opens the float content in a split instead of entering it.
 
 		vim.keymap.set("n", "gk", function()
 			require("hover").enter()

@@ -12,7 +12,7 @@ vim.keymap.set("n", "<c-j>", ":wincmd j<CR>")
 vim.keymap.set("n", "<c-s>", ":vsplit <CR> | :wincmd l<CR>")
 vim.keymap.set("n", "<c-h>", ":wincmd h<CR>")
 vim.keymap.set("n", "<c-l>", ":wincmd l<CR>")
-vim.keymap.set("t", "<esc>", "<C-\\><C-N>", t_opts)
+vim.keymap.set("t", "<esc><esc>", "<C-\\><C-N>", t_opts)
 vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>")
 vim.opt.relativenumber = true
 vim.wo.number = true
