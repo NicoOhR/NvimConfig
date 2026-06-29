@@ -46,4 +46,4 @@ vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 
-vim.cmd.colorscheme("gruvbox")
+vim.cmd.colorscheme("rose-pine")
