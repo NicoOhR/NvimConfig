@@ -1,7 +1,44 @@
 return {
 	{ "sheerun/vim-polyglot" },
-	{ "preservim/vim-pencil" },
-	{ "folke/zen-mode.nvim" },
+	{
+		"preservim/vim-pencil",
+		config = function()
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "markdown",
+				callback = function()
+					vim.fn["pencil#init"]({ wrap = "soft" })
+					vim.opt_local.linebreak = true
+					vim.opt_local.breakindent = true
+					vim.keymap.set("n", "j", "gj", { buffer = true, silent = true })
+					vim.keymap.set("n", "k", "gk", { buffer = true, silent = true })
+				end,
+			})
+		end,
+	},
+	{
+		"folke/zen-mode.nvim",
+		opts = {
+			window = {
+				width = 88,
+				options = {
+					signcolumn = "no",
+					number = false,
+					relativenumber = false,
+				},
+			},
+		},
+		config = function(_, opts)
+			require("zen-mode").setup(opts)
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "markdown",
+				callback = function()
+					vim.opt_local.textwidth = 88
+					vim.opt_local.colorcolumn = "+1"
+					vim.keymap.set("n", "<localleader>z", "<cmd>ZenMode<cr>", { buffer = true, desc = "Toggle zen mode" })
+				end,
+			})
+		end,
+	},
 	{
 		"lervag/vimtex",
 		lazy = false,
