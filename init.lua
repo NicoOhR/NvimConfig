@@ -7,7 +7,7 @@ vim.opt.wildmenu = true
 vim.opt.guicursor = "i:ver75"
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
 		"clone",
@@ -36,10 +36,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = { "*.md", "*.qmd", "*.ipynb" },
-	callback = function() end,
-})
 vim.cmd("filetype plugin indent on")
 vim.cmd("syntax on")
 
@@ -47,4 +43,4 @@ vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 
-vim.cmd.colorscheme("rose-pine")
+vim.cmd.colorscheme("gruvbox-material")

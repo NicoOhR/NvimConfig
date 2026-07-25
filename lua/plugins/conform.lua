@@ -6,14 +6,15 @@ return {
 			require("conform").setup({
 				async = false,
 				formatters_by_ft = {
+					ocaml = { "ocamlformat" },
 					lua = { "stylua" },
 					python = { "ruff_organize_imports", "ruff_format" },
 					rust = { "rustfmt", lsp_format = "fallback" },
 					javascript = { "prettierd", "prettier", stop_after_first = true },
-					go = { "crlfmtl" },
+					go = { "crlfmt" },
 					c = { "clang-format" },
 					cpp = { "clang-format" },
-					markdown = { "injected" },
+					markdown = { "injected", "mdformat" },
 					quarto = { "injected" },
 					haskell = { "fourmolu" },
 					tex = { "tex-fmt" },
@@ -48,6 +49,9 @@ return {
 					-- (defaults to the value from formatters_by_ft)
 					lang_to_formatters = {},
 				},
+			}
+			require("conform").formatters.mdformat = {
+				args = { "--wrap", "80", "-" },
 			}
 		end,
 	},

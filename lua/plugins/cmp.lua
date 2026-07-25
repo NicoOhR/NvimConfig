@@ -14,6 +14,18 @@ return {
 		config = function()
 			local cmp = require("cmp")
 			require("luasnip.loaders.from_vscode").lazy_load()
+
+			-- The docs window renders markdown via legacy `:syntax` rules, which
+			-- treat `_underscored_` / `__words__` as emphasis and highlight them
+			-- differently (markdownBold/markdownItalic). Remap those groups to
+			-- Pmenu so they blend in with the rest of the preview, scoped to
+			-- this window only.
+			local docs_winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None,"
+				.. "markdownBold:Pmenu,markdownBoldDelimiter:Pmenu,"
+				.. "markdownItalic:Pmenu,markdownItalicDelimiter:Pmenu,"
+				.. "markdownBoldItalic:Pmenu,markdownBoldItalicDelimiter:Pmenu,"
+				.. "htmlBold:Pmenu,htmlItalic:Pmenu"
+
 			cmp.setup({
 				snippet = {
 					-- REQUIRED - you must specify a snippet engine
@@ -22,8 +34,18 @@ return {
 					end,
 				},
 				window = {
-					completion = cmp.config.window.bordered(),
-					-- documentation = cmp.config.window.bordered(),
+					completion = cmp.config.window.bordered({
+						border = "rounded",
+						winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+						zindex = 1002,
+					}),
+					documentation = cmp.config.window.bordered({
+						border = "rounded",
+						winhighlight = docs_winhighlight,
+						max_width = 60,
+						max_height = 15,
+						zindex = 1001,
+					}),
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
