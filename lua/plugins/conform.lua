@@ -10,7 +10,7 @@ return {
 					python = { "ruff_organize_imports", "ruff_format" },
 					rust = { "rustfmt", lsp_format = "fallback" },
 					javascript = { "prettierd", "prettier", stop_after_first = true },
-					go = { "crlfmtl" },
+					go = { "crlfmt" },
 					c = { "clang-format" },
 					cpp = { "clang-format" },
 					markdown = { "injected" },

@@ -1,3 +1,12 @@
+-- lean.nvim now reads its config from vim.g.lean_config; opts/setup() is deprecated
+vim.g.lean_config = {
+	mappings = true,
+	lsp = {}, -- empty table = use defaults, which invokes `lake serve`
+	progress_bars = {
+		enable = false,
+	},
+}
+
 return {
 	{
 		"Julian/lean.nvim",
@@ -10,15 +19,6 @@ return {
 			-- 'andymass/vim-matchup',          -- for enhanced % motion behavior
 			-- 'andrewradev/switch.vim',        -- for switch support
 			-- 'tomtom/tcomment_vim',           -- for commenting
-		},
-
-		---@type lean.Config
-		opts = {
-			mappings = true,
-			lsp = {}, -- empty table = use defaults, which invokes `lake serve`
-			progress_bars = {
-				enable = false,
-			},
 		},
 	},
 }
