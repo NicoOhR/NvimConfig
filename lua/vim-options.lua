@@ -24,6 +24,10 @@ end, {})
 
 vim.o.updatetime = 100
 
+vim.opt.foldenable = true
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+
 -- thank you @Jesse-Bakker
 for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
 	local default_diagnostic_handler = vim.lsp.handlers[method]

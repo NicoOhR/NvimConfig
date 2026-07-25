@@ -90,13 +90,7 @@ return {
 				group = vim.api.nvim_create_augroup("lsp", { clear = true }),
 				callback = function(args)
 					local client = vim.lsp.get_client_by_id(args.data.client_id)
-					-- register formatting on save when LSP gets attached
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						buffer = args.buf,
-						callback = function()
-							require("conform").format({ async = false, id = args.data.client_id })
-						end,
-					})
+					-- format-on-save is handled by the global BufWritePre in init.lua
 					--enable hints on attach unless HLS
 					if client and client.name ~= "hls" and client.server_capabilities.inlayHintProvider then
 						vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
@@ -112,7 +106,7 @@ return {
 			vim.diagnostic.config({
 				virtual_text = false,
 				signs = true,
-				underline = true,
+				underline = false,
 				update_in_insert = false,
 				severity_sort = true,
 				float = false,
@@ -128,20 +122,56 @@ return {
 				end,
 			})
 
-			local lean_managed = { leanls = true }
+			local lean_managed = { leanls = true, rust_analyzer = true }
 			local installed_lsp = require("mason-lspconfig").get_installed_servers()
 			for _, lsp in ipairs(installed_lsp) do
 				if not lean_managed[lsp] then
-					vim.lsp.enable(lsp)
 					vim.lsp.config(lsp, {
 						capabilities = capabilities,
 					})
+					vim.lsp.enable(lsp)
 				end
 			end
 			-- server specific configurations can be added outside of the loop
 			vim.lsp.config("pyrefly", {
 				capabilities = capabilities,
 			})
+			-- LSPs that ship with a language toolchain (rustup, opam, ghcup, …)
+			-- instead of Mason: enable the ones whose binary is actually on PATH
+			local toolchain_lsp = { "rust_analyzer", "ocamllsp", "hls" }
+			for _, name in ipairs(toolchain_lsp) do
+				local cmd = (vim.lsp.config[name] or {}).cmd
+				if type(cmd) == "table" and vim.fn.executable(cmd[1]) == 1 then
+					vim.lsp.config(name, { capabilities = capabilities })
+					vim.lsp.enable(name)
+				end
+			end
+
+			-- rust-analyzer on a 7GB machine: cargo check-on-save spawns rustc
+			-- processes that grab 2-3GB each and trip the OOM killer on large
+			-- workspaces (polars et al). Cap its memory footprint.
+			vim.lsp.config("rust_analyzer", {
+				capabilities = capabilities,
+				settings = {
+					["rust-analyzer"] = {
+						-- don't run cargo check/clippy on save (the rustc that OOMs);
+						-- rust-analyzer's own analysis still gives types/errors/completion
+						checkOnSave = false,
+						cargo = {
+							-- one rustc for build scripts, not one per core
+							extraEnv = { CARGO_BUILD_JOBS = "1" },
+						},
+						-- limit analysis worker threads so parallel work doesn't spike RAM
+						numThreads = 2,
+						-- cap the query cache instead of letting it grow unbounded
+						lru = { capacity = 128 },
+						files = {
+							excludeDirs = { "target", ".git" },
+						},
+					},
+				},
+			})
+
 			vim.lsp.config("hls", {
 				capabilities = capabilities,
 				settings = {
@@ -157,6 +187,11 @@ return {
 					},
 				},
 			})
+			vim.lsp.enable("hls")
+			vim.lsp.config("ocamllsp", {
+				capabilities = capabilities,
+			})
+			vim.lsp.enable("ocamllsp")
 		end,
 	},
 }
