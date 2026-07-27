@@ -43,4 +43,4 @@ vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 
-vim.cmd.colorscheme("gruvbox-material")
+vim.cmd.colorscheme("evergarden")

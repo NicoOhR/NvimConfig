@@ -17,10 +17,9 @@ vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>")
 vim.opt.relativenumber = true
 vim.wo.number = true
 vim.opt.shell = "/usr/bin/fish"
-vim.keymap.set("n", "<C-t>", function()
-	require("menu").open("default")
-end, {})
-
+-- vim.keymap.set("n", "<C-t>", function()
+-- 	require("menu").open("default")
+-- end, {})
 
 vim.o.updatetime = 100
 
@@ -29,7 +28,7 @@ vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 
 -- thank you @Jesse-Bakker
-for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
+for _, method in ipairs({ "textDocument/diagnostic", "workspace/diagnostic" }) do
 	local default_diagnostic_handler = vim.lsp.handlers[method]
 	vim.lsp.handlers[method] = function(err, result, context, config)
 		if err ~= nil and err.code == -32802 then

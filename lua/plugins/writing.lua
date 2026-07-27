@@ -1,22 +1,18 @@
 return {
-	{ "sheerun/vim-polyglot" },
 	{
-		"preservim/vim-pencil",
-		config = function()
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "markdown",
-				callback = function()
-					vim.fn["pencil#init"]({ wrap = "soft" })
-					vim.opt_local.linebreak = true
-					vim.opt_local.breakindent = true
-					vim.keymap.set("n", "j", "gj", { buffer = true, silent = true })
-					vim.keymap.set("n", "k", "gk", { buffer = true, silent = true })
-				end,
-			})
+		"sheerun/vim-polyglot",
+		init = function()
+			-- polyglot's indent/markdown.vim forces formatoptions+=t back on after
+			-- our ftplugin runs, which re-enables auto-hard-wrap while typing.
+			-- Its markdown syntax is also redundant with the treesitter
+			-- markdown/markdown_inline parsers we already install.
+			vim.g.polyglot_disabled = { "markdown" }
 		end,
 	},
+	-- Markdown soft-wrap + motions live in ftplugin/markdown.lua (no plugin needed).
 	{
 		"folke/zen-mode.nvim",
+		cmd = "ZenMode",
 		opts = {
 			window = {
 				width = 88,
@@ -27,17 +23,6 @@ return {
 				},
 			},
 		},
-		config = function(_, opts)
-			require("zen-mode").setup(opts)
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "markdown",
-				callback = function()
-					vim.opt_local.textwidth = 88
-					vim.opt_local.colorcolumn = "+1"
-					vim.keymap.set("n", "<localleader>z", "<cmd>ZenMode<cr>", { buffer = true, desc = "Toggle zen mode" })
-				end,
-			})
-		end,
 	},
 	{
 		"lervag/vimtex",
